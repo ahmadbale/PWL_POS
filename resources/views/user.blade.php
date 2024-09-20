@@ -25,8 +25,6 @@
                 <td>{{ $data->nama}}</td>
                 <td>{{ $data->level_id}}</td> --}}
                 <td>{{ $userCount}}</td> 
-
-
             </tr>
         {{-- @endforeach --}}
     </table>
