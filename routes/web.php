@@ -120,10 +120,12 @@ Route::group(['prefix' => 'barang'], function(){
 
 Route::pattern('id','[0-9]+');// ketika ada parameter {id}, maka harus berupa angka
 
+Route::get('register', [AuthController::class,'register'])->name('register');
+Route::post('register', [AuthController::class,'postregister']);
 Route::get('login', [AuthController::class,'login'])->name('login');
 Route::post('login', [AuthController::class,'postlogin']);
 Route::get('logout', [AuthController::class,'logout'])->middleware('auth');
-
+    
 Route::middleware(['auth'])->group(function(){ //artinya semuar route di dalam group ini harus login dulu
 
 Route::get('/', [WelcomeController::class,'index']);
