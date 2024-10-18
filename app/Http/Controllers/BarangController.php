@@ -10,6 +10,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator; 
 use Illuminate\Support\Facades\Hash;
 use PhpOffice\PhpSpreadsheet\IOFactory; 
+use Barryvdh\DomPDF\Facade\Pdf; 
 
 
 class BarangController extends Controller
@@ -20,6 +21,7 @@ class BarangController extends Controller
             'title' => 'Daftar Barang',
             'list' => ['Home', 'Barang']
         ];
+
 
         $page = (object) [
             'title' => 'Daftar barang yang terdaftar dalam sistem'
@@ -35,7 +37,6 @@ class BarangController extends Controller
     public function list(Request $request)
     {
         $barang = BarangModel::select('barang_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual', 'kategori_id')->with('kategori');
-
         if ($request->kategori_id) {
             $barang->where('kategori_id', $request->kategori_id);
         }
@@ -395,4 +396,19 @@ class BarangController extends Controller
             $writter->save('php://output');
             exit;
         } //end function export_excel
+
+        public function export_pdf(){
+            $barang = BarangModel::select('kategori_id','barang_kode','barang_nama','harga_beli','harga_jual')
+            ->orderBy('kategori_id')
+            ->orderBy('barang_kode')
+            ->with('kategori')
+            ->get();
+
+        $pdf = Pdf::loadView('barang.export_pdf', ['barang' => $barang]);
+        $pdf->setPaper('a4', 'portrait'); //set ukuran kertas dan orientasi
+        $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url
+        $pdf->render();
+
+        return $pdf->stream('Data Barang' .date ('Y-m-d H:i:s'). '.pdf');
+        }
 }
