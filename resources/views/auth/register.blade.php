@@ -64,12 +64,19 @@
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    <div class="icheck-primary">
+                        <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                        <label for="agreeTerms">
+                            Saya setuju dengan <a href="#">syarat dan ketentuan</a>
+                        </label>
+                    </div>
                     <div class="row">
                         <div class="col-8">
                         </div>
                         <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+                        <div class="text-center mt-3">
+                            <p>Sudah punya akun? <a href="{{ url('login') }}">Login</a></p>
                         </div>
                         <!-- /.col -->
                     </div>

@@ -55,7 +55,9 @@
             </div> 
           </div> 
         </form> 
-        <a href="{{ url('register') }}" class="text-center">Belum punya akun ?</a>
+        <div class="text-center mt-3">
+          <p>Belum punya akun? <a href="{{ url('register') }}">Daftar</a></p>
+      </div>
       </div> 
             <!-- /.col --> 
           </div> 
