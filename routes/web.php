@@ -282,6 +282,8 @@ Route::middleware(['authorize:STF'])->group(function(){
         Route::delete('/{id}', [BarangController::class, 'destroy']); //hapus data user
         Route::get('/import', [BarangController::class, 'import']); //uppload excel
         Route::post('/import_ajax', [BarangController::class, 'import_ajax']); //ajax import excel
+        Route::post('/', [BarangController::class, 'import_ajax']); //ajax import excel
+        Route::get('/export_excel', [BarangController::class, 'export_excel']); //export excel
     });
 });
 
