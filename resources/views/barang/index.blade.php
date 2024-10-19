@@ -147,8 +147,8 @@
                             <div class="col-md-3"> 
                                 <select name="filter_kategori" class="form-control form-control-sm filter_kategori"> 
                                     <option value="">- Semua -</option> 
-                                    @foreach($kategori as $l) 
-                                        <option value="{{ $l->kategori_id }}">{{ $l->kategori_nama }}</option> 
+                                    @foreach($kategori as $item) 
+                                        <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option> 
                                     @endforeach 
                                 </select> 
                                 <small class="form-text text-muted">Kategori Barang</small> 
@@ -171,9 +171,13 @@
                 </table> 
             </div> 
         </div> 
-        <div id="myModal" class="modal fade animate shake" tabindex="-1" data-backdrop="static"  data-keyboard="false" data-width="75%"></div> 
+        <div id="myModal" class="modal fade animation__shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" 
+        data-width="75%" aria-hidden="true"></div>
          
     @endsection 
+   
+    @push('css')
+    @endpush
      
     @push('js') 
     <script> 
@@ -193,7 +197,7 @@
                 "dataType": "json", 
                 "type": "POST", 
                 "data": function (d) { 
-                    d.filter_kategori = $('.filter_kategori').val(); 
+                    d.filter_kategori = $('#filter_kategori').val(); 
                 } 
             }, 
             columns: [{ 
@@ -254,8 +258,8 @@ $('#table-barang_filter input').unbind().bind().on('keyup', function(e){
     } 
 }); 
 
-$('.filter_kategori').change(function(){ 
-    tableBarang.draw(); 
+$('#filter_kategori').on('change',function(){ 
+    tableBarang.draw();
 }); 
 }); 
 </script> 

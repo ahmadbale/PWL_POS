@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory; 
+use Barryvdh\DomPDF\Facade\Pdf; 
+
 
 class UserController extends Controller
 {
@@ -300,10 +303,10 @@ class UserController extends Controller
                     foreach ($data as $baris => $value) { 
                         if($baris > 1){ // baris ke 1 adalah header, maka lewati 
                             $insert[] = [ 
-                                'user_id' => $value['A'], 
+                                'level_id' => $value['A'], 
                                 'username' => $value['B'], 
                                 'nama' => $value['C'], 
-                                'level_pengguna' => $value['D'], 
+                                'password' => $value['D'], 
                                 'created_at' => now(), 
                             ]; 
                         } 
@@ -311,7 +314,7 @@ class UserController extends Controller
      
                     if(count($insert) > 0){ 
                         // insert data ke database, jika data sudah ada, maka diabaikan 
-                        BarangModel::insertOrIgnore($insert);    
+                        UserModel::insertOrIgnore($insert);    
                     } 
      
                     return response()->json([ 
@@ -331,9 +334,9 @@ class UserController extends Controller
         public function export_excel()
         {
             // ambil data barang yang akan di export
-            $barang = BarangModel::select('kategori_id','barang_kode','barang_nama','harga_beli','harga_jual')
-                                        ->orderBy('kategori_id')
-                                        ->with('kategori')
+            $user = UserModel::select('level_id','username','nama')
+                                        ->orderBy('level_id')
+                                        ->with('level')
                                         ->get();
 
 
@@ -342,35 +345,31 @@ class UserController extends Controller
             $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
 
             $sheet->setCellValue('A1', 'No');
-            $sheet->setCellValue('B1', 'Kode Barang');
-            $sheet->setCellValue('C1', 'Nama Barang');
-            $sheet->setCellValue('D1', 'Harga Beli');
-            $sheet->setCellValue('E1', 'Harga Jual');
-            $sheet->setCellValue('F1', 'Kategori');
+            $sheet->setCellValue('B1', 'Username');
+            $sheet->setCellValue('C1', 'Nama');
+            $sheet->setCellValue('D1', 'Level Pengguna');
 
-            $sheet->getStyle('A1:F1')->getFont()->setBold(true); //bold header
+            $sheet->getStyle('A1:D1')->getFont()->setBold(true); //bold header
             
             $no=1; //nomor data dimulai dari 1
             $baris = 2;
-            foreach ($barang as $key => $value){
+            foreach ($user as $key => $value){
                 $sheet->setCellValue('A' .$baris, $no);
-                $sheet->setCellValue('B' .$baris, $value->barang_kode);
-                $sheet->setCellValue('C' .$baris, $value->barang_nama);
-                $sheet->setCellValue('D' .$baris, $value->harga_beli);
-                $sheet->setCellValue('E' .$baris, $value->harga_jual);
-                $sheet->setCellValue('F' .$baris, $value->kategori->kategori_nama); //ambil nama kategori
+                $sheet->setCellValue('B' .$baris, $value->username);
+                $sheet->setCellValue('C' .$baris, $value->nama);
+                $sheet->setCellValue('D' .$baris, $value->level->level_nama); //ambil nama kategori
                 $baris++;
                 $no++;
             }
 
-            foreach(range('A','F') as $columnID) {
+            foreach(range('A','D') as $columnID) {
                 $sheet->getColumnDimension($columnID)->setAutoSize(true); //set auto size untuk kolom
             }
             
-            $sheet->setTitle('Data Barang'); //set title sheet
+            $sheet->setTitle('Data User'); //set title sheet
 
             $writter = IOFactory::createWriter($spreadsheet, 'Xlsx');
-            $filename = 'Data Barang ' .date('Y-m-d H:i:s') .' .xlsx';
+            $filename = 'Data User ' .date('Y-m-d H:i:s') .' .xlsx';
             
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment;filename="'.$filename.'"');
@@ -386,18 +385,17 @@ class UserController extends Controller
         } //end function export_excel
 
         public function export_pdf(){
-            $barang = BarangModel::select('kategori_id','barang_kode','barang_nama','harga_beli','harga_jual')
-            ->orderBy('kategori_id')
-            ->orderBy('barang_kode')
-            ->with('kategori')
-            ->get();
+            $user = UserModel::select('level_id','username','nama')
+                                        ->orderBy('level_id')
+                                        ->with('level')
+                                        ->get();
 
-        $pdf = Pdf::loadView('barang.export_pdf', ['barang' => $barang]);
+        $pdf = Pdf::loadView('user.export_pdf', ['user' => $user]);
         $pdf->setPaper('a4', 'portrait'); //set ukuran kertas dan orientasi
         $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url
         $pdf->render();
 
-        return $pdf->stream('Data Barang' .date ('Y-m-d H:i:s'). '.pdf');
+        return $pdf->stream('Data User' .date ('Y-m-d H:i:s'). '.pdf');
         }
 }
         //tambah data

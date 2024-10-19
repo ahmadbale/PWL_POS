@@ -36,10 +36,14 @@ class BarangController extends Controller
 
     public function list(Request $request)
     {
-        $barang = BarangModel::select('barang_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual', 'kategori_id')->with('kategori');
+        $barang = BarangModel::select('barang_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual', 'kategori_id')
+        ->with('kategori');
+        
         if ($request->kategori_id) {
             $barang->where('kategori_id', $request->kategori_id);
         }
+
+        
 
         return DataTables::of($barang)
             // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex) 
