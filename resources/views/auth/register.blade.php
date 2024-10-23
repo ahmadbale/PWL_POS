@@ -15,12 +15,22 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+
+    <style>
+        .register-page{
+        background-image: url("{{ asset('bg-image.jpg') }}"); /* Ganti dengan path ke gambar kamu */
+        background-size: 100% 100%; /* Agar gambar mencakup seluruh halaman */
+        background-position: center; /* Agar gambar terpusat */
+        background-repeat: no-repeat; 
+        }
+      </style>
+
 </head>
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a>
+                <a href="{{ url('/') }}" class="h1">Poline<b>Mart</b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Daftar Akun</p>
@@ -74,10 +84,11 @@
                         <div class="col-8">
                         </div>
                         <!-- /.col -->
-                            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
-                        <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+                        <a href="login" class="btn btn-warning btn-block">Kembali</a>
+                        {{-- <div class="text-center mt-3">
                             <p>Sudah punya akun? <a href="{{ url('login') }}">Login</a></p>
-                        </div>
+                        </div> --}}
                         <!-- /.col -->
                     </div>
                 </form>

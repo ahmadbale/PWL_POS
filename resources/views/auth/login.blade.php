@@ -15,12 +15,22 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}"> 
     <!-- Theme style --> 
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}"> 
+
+    <style>
+      .login-page{
+      background-image: url("{{ asset('bg-image.jpg') }}"); /* Ganti dengan path ke gambar kamu */
+      background-size: 100% 100%; /* Agar gambar mencakup seluruh halaman */
+      background-position: center; /* Agar gambar terpusat */
+      background-repeat: no-repeat; 
+      }
+    </style>
+
   </head> 
   <body class="hold-transition login-page"> 
   <div class="login-box"> 
     <!-- /.login-logo --> 
     <div class="card card-outline card-primary"> 
-      <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a></div> 
+      <div class="card-header text-center"><a href="{{ url('/') }}" class="h1">Poline<b>Mart</b></a></div> 
       <div class="card-body"> 
         <p class="login-box-msg">Sign in to start your session</p> 
         <form action="{{ url('login') }}" method="POST" id="form-login"> 

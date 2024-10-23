@@ -1,5 +1,24 @@
 <div class="sidebar">
-  <!-- SidebarSearch Form -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img 
+            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.png')))
+                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.png') }}"
+            @endif
+            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.jpg')))
+                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.jpg') }}"
+            @endif
+            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.jpeg')))
+                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.jpeg') }}"
+            @endif
+          class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="{{ url('/profile')}}" class="d-block">{{ auth()->user()->nama }}</a>
+        </div>
+      </div>
+
+    <!-- SidebarSearch Form -->
   <div class="form-inline mt-2">
       <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -19,57 +38,98 @@
                   <p>Dashboard</p>
               </a>
           </li>
-          <li class="nav-header">Data Pengguna</li>
-          <li class="nav-item">
-              <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level')? 'active' : '' }} ">
-                  <i class="nav-icon fas fa-layer-group"></i>
-                  <p>Level User</p>
-              </a>
-          </li>
-          <li class="nav-item">
-              <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user')? 'active' : '' }}">
-                  <i class="nav-icon far fa-user"></i>
-                  <p>Data User</p>
-              </a>
-          </li>
-          <li class="nav-header">Data Barang</li>
-          <li class="nav-item">
-              <a href="{{ url('/kategori') }}" class="nav-link {{ ($activeMenu =='kategori')? 'active' : '' }} ">
-                  <i class="nav-icon far fa-bookmark"></i>
-                  <p>Kategori Barang</p>
-              </a>
-          </li>
-          <li class="nav-item">
-              <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 'barang')? 'active' : '' }} ">
-                  <i class="nav-icon far fa-list-alt"></i>
-                  <p>Data Barang</p>
-              </a>
-          </li>
-          <li class="nav-item">
-              <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier')? 'active' : '' }} ">
-                  <i class="nav-icon fa fa-store"></i>
-                  <p>Data Supplier</p>
-              </a>
-          </li>
-          <li class="nav-header">Data Transaksi</li>
-          <li class="nav-item">
-              <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')? 'active' : '' }} ">
-                  <i class="nav-icon fas fa-cubes"></i>
-                  <p>Stok Barang</p>
-              </a>
-          </li>
-          <li class="nav-item">
-              <a href="{{ url('/transaksi') }}" class="nav-link {{ ($activeMenu =='penjualan')? 'active' : '' }} ">
-                  <i class="nav-icon fas fa-cash-register"></i>
-                  <p>Transaksi Penjualan</p>
-              </a>
-          </li>
+
+          <li class="nav-item has-treeview {{ ($activeMenu == 'level' || $activeMenu == 'user') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                    Menu Pengguna
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-layer-group"></i>
+                        <p>Level User</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-user"></i>
+                        <p>Data User</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item has-treeview {{ ($activeMenu == 'kategori' || $activeMenu == 'barang' || $activeMenu == 'stok') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-archive"></i>
+                <p>
+                    Menu Barang
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ url('/kategori') }}" class="nav-link {{ ($activeMenu == 'kategori') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-bookmark"></i>
+                        <p>Kategori Barang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 'barang') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-list-alt"></i>
+                        <p>Data Barang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-store"></i>
+                        <p>Data Supplier</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')? 'active' : '' }} ">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>Stok Barang</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item has-treeview {{ ($activeMenu == 'penjualan' || $activeMenu == 'detail_penjualan') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>
+                    Menu Transaksi
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ url('/penjualan') }}" class="nav-link {{ ($activeMenu == 'penjualan') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cash-register"></i>
+                        <p>Transaksi Penjualan</p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ url('/detail_penjualan') }}" class="nav-link {{ ($activeMenu == 'detail_penjualan') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-plus-square"></i>
+                        <p>Transaksi Detail Penjualan</p>
+                    </a>
+                </li>
+            </ul>
+
           <li class="nav-item">
               <a href="{{ url('/logout') }}" class="nav-link {{ ($activeMenu =='logout')? 'active' : '' }} ">
                   <i class="nav-icon fas fa-sign-out-alt"></i>
                   <p>Logout</p>
               </a>
           </li>
-      </ul>
+     
   </nav>
 </div>

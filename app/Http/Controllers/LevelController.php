@@ -222,6 +222,13 @@ class LevelController extends Controller
         return view('level.confirm_ajax', ['level' => $level]);
     }
 
+    public function show_ajax(string $id)
+    {
+        $level = LevelModel::find($id);
+
+        return view('level.show_ajax', ['level' => $level]);
+    }
+
     public function delete_ajax(Request $request, $id){
         if($request -> ajax() || $request -> wantsJson()){
             $level = LevelModel::find($id);
