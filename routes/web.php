@@ -9,6 +9,7 @@ use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -191,5 +192,32 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::post('/import_ajax', [PenjualanController::class, 'import_ajax']); // ajax import excel
         Route::get('/export_excel', [PenjualanController::class, 'export_excel']); // ajax export excel
         Route::get('/export_pdf', [PenjualanController::class, 'export_pdf']); // ajax export pdf
+    });
+
+    Route::group(['prefix' => 'detailpenjualan', 'middleware' => 'authorize:ADM,MNG,STF'], function () {
+        Route::get('/', [DetailPenjualanController::class, 'index']);
+        Route::post('/list', [DetailPenjualanController::class, 'list']);
+        Route::get('/create', [DetailPenjualanController::class, 'create']);
+        Route::get('/create_ajax', [DetailPenjualanController::class, 'create_ajax']);
+        Route::post('/ajax', [DetailPenjualanController::class, 'store_ajax']);
+        Route::post('/', [DetailPenjualanController::class, 'store']);
+        Route::get('/{id}', [DetailPenjualanController::class, 'show']);
+        Route::get('/{id}/show_ajax', [DetailPenjualanController::class, 'show_ajax']);
+        Route::get('/{id}/edit', [DetailPenjualanController::class, 'edit']);
+        Route::put('/{id}', [DetailPenjualanController::class, 'update']);
+        Route::get('/{id}/edit_ajax', [DetailPenjualanController::class, 'edit_ajax']);
+        Route::put('/{id}/update_ajax', [DetailPenjualanController::class, 'update_ajax']);
+        Route::get('/{id}/delete_ajax', [DetailPenjualanController::class, 'confirm_ajax']);
+        Route::delete('/{id}/delete_ajax', [DetailPenjualanController::class, 'delete_ajax']);
+        Route::delete('/{id}', [DetailPenjualanController::class, 'destroy']);
+        Route::get('/import', [DetailPenjualanController::class, 'import']); // ajax form upload excel
+        Route::post('/import_ajax', [DetailPenjualanController::class, 'import_ajax']); // ajax import excel
+        Route::get('/export_excel', [DetailPenjualanController::class, 'export_excel']); // ajax export excel
+        Route::get('/export_pdf', [DetailPenjualanController::class, 'export_pdf']); // ajax export pdf
+    });
+
+    Route::group(['prefix' =>'profile'],function(){
+        Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+        Route::patch('/{id}', [ProfileController::class, 'update'])->name('profile.update');
     });
 });

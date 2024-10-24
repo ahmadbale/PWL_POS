@@ -1,23 +1,4 @@
 <div class="sidebar">
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img 
-            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.png')))
-                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.png') }}"
-            @endif
-            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.jpg')))
-                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.jpg') }}"
-            @endif
-            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.jpeg')))
-                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.jpeg') }}"
-            @endif
-          class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="{{ url('/profile')}}" class="d-block">{{ auth()->user()->nama }}</a>
-        </div>
-      </div>
-
     <!-- SidebarSearch Form -->
   <div class="form-inline mt-2">
       <div class="input-group" data-widget="sidebar-search">
@@ -99,7 +80,7 @@
             </ul>
         </li>
 
-        <li class="nav-item has-treeview {{ ($activeMenu == 'penjualan' || $activeMenu == 'detail_penjualan') ? 'menu-open' : '' }}">
+        <li class="nav-item has-treeview {{ ($activeMenu == 'penjualan' || $activeMenu == 'detailpenjualan') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shopping-cart"></i>
                 <p>
@@ -114,16 +95,13 @@
                         <p>Transaksi Penjualan</p>
                     </a>
                 </li>
-            </ul>
-            <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ url('/detail_penjualan') }}" class="nav-link {{ ($activeMenu == 'detail_penjualan') ? 'active' : '' }}">
+                    <a href="{{ url('/detailpenjualan') }}" class="nav-link {{ ($activeMenu == 'detailpenjualan') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-plus-square"></i>
-                        <p>Transaksi Detail Penjualan</p>
+                        <p>Detail Penjualan</p>
                     </a>
                 </li>
             </ul>
-
           <li class="nav-item">
               <a href="{{ url('/logout') }}" class="nav-link {{ ($activeMenu =='logout')? 'active' : '' }} ">
                   <i class="nav-icon fas fa-sign-out-alt"></i>

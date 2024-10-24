@@ -5,10 +5,8 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <button onclick="modalAction('{{ url('/stok/import') }}')" class="btn btn-info">Import Stok</button> 
-                <a href="{{ url('/stok/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>  Export Stok (XLSX)</a>
-                <a href="{{ url('/stok/export_pdf') }}" class="btn btn-danger"><i class="fa fa-file-pdf"></i> Export Stok (PDF)</a> 
-                <button onclick="modalAction('{{ url('/stok/create_ajax') }}')" class="btn btn-success">Tambah Data</button> 
+                <a href="{{ url('/detailpenjualan/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>  Export Stok (XLSX)</a>
+                <a href="{{ url('/detailpenjualan/export_pdf') }}" class="btn btn-danger"><i class="fa fa-file-pdf"></i> Export Stok (PDF)</a> 
             </div>
         </div>
         <div class="card-body">
@@ -23,34 +21,25 @@
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select name="supplier_id" id="supplier_id" class="form-control" required>
+                            <select name="barang_id" id="barang_id" class="form-control" required>
                                 <option value="">- Semua -</option>
-                                @foreach ($supplier as $item)
-                                    <option value="{{ $item->supplier_id }}">{{ $item->supplier_nama }}</option>
+                                @foreach ($barang as $b)
+                                    <option value="{{ $b->barang_id }}">{{ $b->barang_nama }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Filter Supplier</small>
-                            <br>
-                            <select name="user_id" id="user_id" class="form-control" required>
-                                <option value="">- Semua -</option>
-                                @foreach ($user as $u)
-                                    <option value="{{ $u->user_id }}">{{ $u->nama }}</option>
-                                @endforeach
-                            </select>
-                            <small class="form-text text-muted">Filter PIC</small>
+                            <small class="form-text text-muted">Nama Barang</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-border table-striped table-hover table-sm" id="table_stok">
+            <table class="table table-border table-striped table-hover table-sm" id="table_detailpenjualan">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Supplier</th>
+                        <th>Kode Penjualan</th>
                         <th>Nama Barang</th>
-                        <th>PIC</th>
-                        <th>Tanggal</th>
-                        <th>Jumlah</th>
+                        <th>Harga</th>
+                        <th>Total Pembelian</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -71,18 +60,17 @@
             });
         }
 
-        var dataStok;
+        var dataDetailPenjualan;
         $(document).ready(function(){
-            dataStok = $('#table_stok').DataTable({
+            dataDetailPenjualan = $('#table_detailpenjualan').DataTable({
                 //serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax:{
-                    "url": "{{ url('stok/list') }}",
+                    "url": "{{ url('detailpenjualan/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d){
-                        d.supplier_id = $('#supplier_id').val();
-                        d.user_id = $('#user_id').val();
+                        d.barang_id = $('#barang_id').val();
                     }
                 },
                 columns:[
@@ -93,30 +81,25 @@
                         orderable: false,
                         searchable: false
                     },{
-                        data: "supplier.supplier_nama",
+                        data: "penjualan.penjualan_kode",
                         className: "",
                         orderable: false,
-                        searchable: true
+                        searchable: false
                     },{
                         data: "barang.barang_nama",
                         className: "",
                         orderable:false,
-                        searchable: true
+                        searchable: false
                     },{
                         // mengambil data level dari hasil ORM berelasi
-                        data: "user.nama",
+                        data: "harga",
                         className: "",
-                        orderable: false,
+                        orderable: true,
                         searchable: true
                     },{
-                        data: "stok_tanggal",
+                        data: "jumlah",
                         className: "",
-                        orderable:true,
-                        searchable: true
-                    },{
-                        data: "stok_jumlah",
-                        className: "",
-                        orderable:true,
+                        orderable: true,
                         searchable: true
                     },{
                         data: "aksi",
@@ -126,11 +109,8 @@
                     }
                 ]
             });
-            $('#supplier_id').on('change', function(){
-                dataStok.ajax.reload();
-            });
-            $('#user_id').on('change', function(){
-                dataStok.ajax.reload();
+            $('#barang_id').on('change', function(){
+                dataDetailPenjualan.ajax.reload();
             });
         });
     </script>
