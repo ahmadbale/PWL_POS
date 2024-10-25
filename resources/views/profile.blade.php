@@ -163,7 +163,6 @@
                                 </div>
                                 <h4 class="fw-bold mb-1">{{ $user->nama }}</h4>
                                 <p class="text-muted mb-0">
-                                    <i class="fas fa-user-circle me-1"></i>
                                     {{ $user->username }}
                                 </p>
                             </div>
@@ -233,7 +232,8 @@
                                             </label>
                                             <input id="password" type="password"
                                                 class="form-control form-control-lg shadow-sm @error('password') is-invalid @enderror"
-                                                name="password" autocomplete="new-password"
+                                                name="password" 
+                                                autocomplete="new-password"
                                                 placeholder="Masukkan password ">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
@@ -260,10 +260,10 @@
 
                                     <!-- Tombol Submit -->
                                     <div class="text-end mt-4">
-                                        <button type="button" class="btn btn-light btn-lg me-2">
+                                        {{-- <button type="button" class="btn btn-light btn-lg me-2">
                                             <i class="fas fa-times me-1"></i>
                                             {{ __('Batal') }}
-                                        </button>
+                                        </button> --}}
                                         <button type="submit" class="btn btn-primary btn-lg px-4">
                                             <i class="fas fa-save me-1"></i>
                                             {{ __('Simpan Perubahan') }}

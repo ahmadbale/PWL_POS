@@ -5,8 +5,8 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a href="{{ url('/detailpenjualan/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>  Export Stok (XLSX)</a>
-                <a href="{{ url('/detailpenjualan/export_pdf') }}" class="btn btn-danger"><i class="fa fa-file-pdf"></i> Export Stok (PDF)</a> 
+                <a href="{{ url('/detailpenjualan/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>  Export Detail Penjualan (XLSX)</a>
+                <a href="{{ url('/detailpenjualan/export_pdf') }}" class="btn btn-danger"><i class="fa fa-file-pdf"></i> Export Detail Penjualan (PDF)</a> 
             </div>
         </div>
         <div class="card-body">

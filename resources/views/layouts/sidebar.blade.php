@@ -102,12 +102,29 @@
                     </a>
                 </li>
             </ul>
+            <li class="nav-item">
+                <a href="{{ url('/profile') }}" class="nav-link {{ ($activeMenu =='profile')? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Pengaturan Profil</p>
+                </a>
+            </li>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
           <li class="nav-item">
               <a href="{{ url('/logout') }}" class="nav-link {{ ($activeMenu =='logout')? 'active' : '' }} ">
                   <i class="nav-icon fas fa-sign-out-alt"></i>
                   <p>Logout</p>
               </a>
           </li>
-     
   </nav>
 </div>

@@ -86,7 +86,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-warning" id="btn-print-invoice">Cetak Invoice</button>
+                <button type="button" class="btn btn-warning" id="btn-print-invoice">Print Out</button>
             </div>
             
         </div>

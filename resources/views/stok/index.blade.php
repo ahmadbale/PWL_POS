@@ -29,7 +29,7 @@
                                     <option value="{{ $item->supplier_id }}">{{ $item->supplier_nama }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Filter Supplier</small>
+                            <small class="form-text text-muted">Nama Supplier</small>
                             <br>
                             <select name="user_id" id="user_id" class="form-control" required>
                                 <option value="">- Semua -</option>
@@ -37,7 +37,7 @@
                                     <option value="{{ $u->user_id }}">{{ $u->nama }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Filter PIC</small>
+                            <small class="form-text text-muted">Nama PIC</small>
                         </div>
                     </div>
                 </div>

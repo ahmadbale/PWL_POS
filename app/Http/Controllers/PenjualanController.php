@@ -107,7 +107,7 @@ class PenjualanController extends Controller
     public function edit_ajax(string $id){
         $penjualan = PenjualanModel::find($id);
         $user = UserModel::all();
-        return view('penjualan.edit_ajax', ['penjualan' => $penjualan]);
+        return view('penjualan.edit_ajax', ['penjualan' => $penjualan, 'user' => $user]);
     }
 
 
@@ -119,7 +119,7 @@ class PenjualanController extends Controller
             $rules = [ 
                 'user_id' => 'required|integer',
                 'pembeli' => 'required|string|min:3',
-                'penjualan_kode' => 'required|string|min:3|unique:t_penjualan,penjualan_kode',
+                'penjualan_kode' => 'required|string|min:3',
                 'penjualan_tanggal' => 'required|date_format:Y-m-d\TH:i',
             ]; 
             $validator = Validator::make($request->all(), $rules); 

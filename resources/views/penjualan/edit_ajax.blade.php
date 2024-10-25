@@ -71,7 +71,7 @@
                     user_id: { required: true, number: true },
                     pembeli: { required: true, minlength: 3, maxlength: 50 },
                     penjualan_kode: { required: true, minlength: 3, maxlength: 20 },
-                    penjualan_tanggal: { required: true, number:true }
+                    penjualan_tanggal: { required: true }
                 },
                 submitHandler: function(form) {
                     $.ajax({

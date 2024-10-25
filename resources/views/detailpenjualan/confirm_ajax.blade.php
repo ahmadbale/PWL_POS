@@ -15,7 +15,7 @@
         </div>
     </div>
     @else 
-    <form action="{{ url('/detailpenjualan/' . $detailpenjualan->detailpenjualan_id . '/delete_ajax') }}" method="POST" id="form-delete">
+    <form action="{{ url('/detailpenjualan/' . $detailpenjualan->detail_id . '/delete_ajax') }}" method="POST" id="form-delete">
     @csrf
     @method('DELETE')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
@@ -60,7 +60,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataUser.ajax.reload();
+                                dataDetailPenjualan.ajax.reload();
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {
