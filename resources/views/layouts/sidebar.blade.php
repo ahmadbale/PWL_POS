@@ -1,4 +1,11 @@
-<div class="sidebar">
+<style>
+    .p1{
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="sidebar" >
     <!-- SidebarSearch Form -->
   <div class="form-inline mt-2">
       <div class="input-group" data-widget="sidebar-search">
@@ -16,14 +23,14 @@
           <li class="nav-item">
               <a href="{{ url('/') }}" class="nav-link {{ ($activeMenu == 'dashboard')? 'active' : '' }} ">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
+                  <p class="p1">Dashboard</p>
               </a>
           </li>
 
           <li class="nav-item has-treeview {{ ($activeMenu == 'level' || $activeMenu == 'user') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
-                <p>
+                <p class="p1">
                     Menu Pengguna
                     <i class="right fas fa-angle-left"></i>
                 </p>
@@ -47,7 +54,7 @@
         <li class="nav-item has-treeview {{ ($activeMenu == 'kategori' || $activeMenu == 'barang' || $activeMenu == 'stok') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-archive"></i>
-                <p>
+                <p class="p1">
                     Menu Barang
                     <i class="right fas fa-angle-left"></i>
                 </p>
@@ -83,7 +90,7 @@
         <li class="nav-item has-treeview {{ ($activeMenu == 'penjualan' || $activeMenu == 'detailpenjualan') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shopping-cart"></i>
-                <p>
+                <p class="p1">
                     Menu Transaksi
                     <i class="right fas fa-angle-left"></i>
                 </p>
@@ -105,9 +112,16 @@
             <li class="nav-item">
                 <a href="{{ url('/profile') }}" class="nav-link {{ ($activeMenu =='profile')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-user"></i>
-                    <p>Pengaturan Profil</p>
+                    <p class="p1">Pengaturan Profil</p>
                 </a>
             </li>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <br>
             <br>
             <br>

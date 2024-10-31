@@ -222,25 +222,43 @@
                                             @enderror
                                         </div>
                                     </div>
+                                 
+                                  <!-- Password Lama -->
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label for="old_password" class="form-label fw-bold">
+            <i class="fas fa-lock me-1"></i>
+            {{ __('Password Lama') }}
+        </label>
+        <input id="old_password" type="password"
+            class="form-control form-control-lg shadow-sm @error('old_password') is-invalid @enderror"
+            name="old_password"
+            placeholder="Masukkan password lama">
+        @error('old_password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
 
-                                    <!-- Password -->
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="password" class="form-label fw-bold">
-                                                <i class="fas fa-lock me-1"></i>
-                                                {{ __('Password Baru') }}
-                                            </label>
-                                            <input id="password" type="password"
-                                                class="form-control form-control-lg shadow-sm @error('password') is-invalid @enderror"
-                                                name="password" 
-                                                autocomplete="new-password"
-                                                placeholder="Masukkan password ">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+    <!-- Password Baru -->
+    <div class="col-md-6 mb-3">
+        <label for="password" class="form-label fw-bold">
+            <i class="fas fa-lock me-1"></i>
+            {{ __('Password Baru') }}
+        </label>
+        <input id="password" type="password"
+            class="form-control form-control-lg shadow-sm @error('password') is-invalid @enderror"
+            name="password" 
+            autocomplete="new-password"
+            placeholder="Masukkan password baru">
+        @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
 
                                         <!-- Upload Foto Profil -->
                                         <div class="col-md-6 mb-3">

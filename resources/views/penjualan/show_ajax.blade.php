@@ -86,7 +86,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-warning" id="btn-print-invoice">Print Out</button>
+                <button type="button" class="btn btn-warning" id="btn-print-invoice">Cetak Invoice</button>
             </div>
             
         </div>
@@ -147,121 +147,120 @@
         $("#btn-print-invoice").on("click", function() {
             var invoiceContent = `
             <html>
-    <head>
-        <title>Invoice</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 20px;
-                background-color: #f4f7fa;
-            }
-            .invoice-container {
-                max-width: 800px;
-                margin: auto;
-                background: white;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-                border-top: 5px solid #4CAF50;
-            }
-            .header {
-                text-align: center;
-                padding-bottom: 20px;
-            }
-            .header img {
-                max-width: 150px;
-            }
-            h1 {
-                color: #4CAF50;
-                margin-bottom: 5px;
-            }
-            .invoice-info {
-                margin: 20px 0;
-                background-color: #f0f4f7;
-                padding: 15px;
-                border-radius: 8px;
-            }
-            .invoice-info p {
-                margin: 5px 0;
-                color: #333;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-            }
-            th, td {
-                border: 1px solid #ddd;
-                padding: 12px;
-                text-align: left;
-            }
-            th {
-                background-color: #4CAF50;
-                color: white;
-            }
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-            .total {
-                font-weight: bold;
-                background-color: #4CAF50;
-                color: white;
-            }
-            .footer {
-                text-align: center;
-                margin-top: 30px;
-                padding-top: 20px;
-                border-top: 1px solid #ddd;
-                color: #555;
-            }
-            .footer p {
-                font-size: 14px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="invoice-container">
-            <div class="header">
-                <img src="URL_TO_YOUR_LOGO" alt="Logo">
-                <h1>Invoice Penjualan</h1>
-            </div>
-            <div class="invoice-info">
-                <p><strong>PIC:</strong> {{{ $penjualan->user->nama }}}</p>
-                <p><strong>Pembeli:</strong> {{{ $penjualan->pembeli }}}</p>
-                <p><strong>Kode Penjualan:</strong> {{{ $penjualan->penjualan_kode }}}</p>
-                <p><strong>Tanggal Penjualan:</strong> {{{ $penjualan->penjualan_tanggal }}}</p>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nama Barang</th>
-                        <th>Jumlah</th>
-                        <th>Harga</th>
-                        <th>Total Harga</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($detailpenjualan as $detail)
-                        <tr>
-                            <td>{{{ $detail->barang->barang_nama }}}</td>
-                            <td>{{{ $detail->jumlah }}}</td>
-                            <td>Rp. {{ number_format($detail->harga, 0, ',', '.') }}</td>
-                            <td>Rp. {{ number_format($detail->jumlah * $detail->harga, 0, ',', '.') }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="total">Total Keseluruhan</td>
-                        <td class="total">Rp. {{ number_format($totalKeseluruhan, 0, ',', '.') }}</td>
-                    </tr>
-                </tfoot>
-            </table>
+<head>
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f1f4f8;
+            color: #333;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #0073e6;
+            padding-bottom: 20px;
+        }
+        .header img {
+            max-width: 120px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            color: #0073e6;
+            font-size: 26px;
+            margin-top: 0;
+        }
+        .invoice-info {
+            margin: 20px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .invoice-info p {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 14px;
+            color: #333;
+        }
+        th {
+            background-color: #0073e6;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .total {
+            font-weight: bold;
+            background-color: #e0f1ff;
+            color: #0073e6;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <img src="polinema.png" alt="Logo">
+            <h1>Invoice Penjualan</h1>
         </div>
-    </body>
-    </html>
-
+        <div class="invoice-info">
+            <p>PIC: {{ $penjualan->user->nama }}</p>
+            <p>Pembeli: {{ $penjualan->pembeli }}</p>
+            <p>Kode Penjualan: {{ $penjualan->penjualan_kode }}</p>
+            <p>Tanggal Penjualan: {{ $penjualan->penjualan_tanggal }}</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Barang</th>
+                    <th>Jumlah</th>
+                    <th>Harga</th>
+                    <th>Total Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($detailpenjualan as $detail)
+                    <tr>
+                        <td>{{ $detail->barang->barang_nama }}</td>
+                        <td>{{ $detail->jumlah }}</td>
+                        <td>Rp. {{ number_format($detail->harga, 0, ',', '.') }}</td>
+                        <td>Rp. {{ number_format($detail->jumlah * $detail->harga, 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="total">Total Keseluruhan</td>
+                    <td class="total">Rp. {{ number_format($totalKeseluruhan, 0, ',', '.') }}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="footer">
+            <p>Terima kasih atas pembelian Anda!</p>
+        </div>
+    </div>
+</body>
+</html>
             `;
 
             var newWindow = window.open('', '_blank');

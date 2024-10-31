@@ -23,22 +23,30 @@
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select name="supplier_id" id="supplier_id" class="form-control" required>
-                                <option value="">- Semua -</option>
-                                @foreach ($supplier as $item)
-                                    <option value="{{ $item->supplier_id }}">{{ $item->supplier_nama }}</option>
-                                @endforeach
-                            </select>
-                            <small class="form-text text-muted">Nama Supplier</small>
-                            <br>
-                            <select name="user_id" id="user_id" class="form-control" required>
-                                <option value="">- Semua -</option>
-                                @foreach ($user as $u)
-                                    <option value="{{ $u->user_id }}">{{ $u->nama }}</option>
-                                @endforeach
-                            </select>
-                            <small class="form-text text-muted">Nama PIC</small>
-                        </div>
+                            <div class="d-flex justify-content-between">
+                                <!-- Filter Supplier -->
+                                <div class="filter-item me-2" style="flex: 1;">
+                                    <select name="supplier_id" id="supplier_id" class="form-control" required>
+                                        <option value="">- Semua -</option>
+                                        @foreach ($supplier as $item)
+                                            <option value="{{ $item->supplier_id }}">{{ $item->supplier_nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    <small class="form-text text-muted">Nama Supplier</small>
+                                </div>
+                        
+                                <!-- Filter PIC -->
+                                <div class="filter-item" style="flex: 1;">
+                                    <select name="user_id" id="user_id" class="form-control" required>
+                                        <option value="">- Semua -</option>
+                                        @foreach ($user as $u)
+                                            <option value="{{ $u->user_id }}">{{ $u->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    <small class="form-text text-muted">Nama PIC</small>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>

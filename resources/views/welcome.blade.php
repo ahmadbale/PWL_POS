@@ -86,6 +86,8 @@
                 <div class="inner">
                     <h3>{{ $totalStok }}</h3>
                     <p>Jumlah Data Stok</p>
+                    <h4>{{ $totalStokDetail}}</h4>
+                    <p>Jumlah Stok</p>
                 </div>
                 <div class="icon">
                     <i class="nav-icon fas fa-cubes"></i>

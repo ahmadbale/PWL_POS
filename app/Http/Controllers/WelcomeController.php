@@ -27,7 +27,9 @@ class WelcomeController extends Controller
         $totalStok = StokModel::count();
         $totalPenjualan = PenjualanModel::count();
         $totalDetailPenjualan = PenjualanDetailModel::count();
+        $totalStokDetail = StokModel::sum('stok_jumlah');
 
-        return view('welcome', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu, 'totalUser' => $totalUser, 'totalBarang' => $totalBarang, 'totalSupplier' => $totalSupplier, 'totalPenjualan' => $totalPenjualan, 'totalDetailPenjualan' => $totalDetailPenjualan, 'totalStok' => $totalStok ]);
+
+        return view('welcome', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu, 'totalUser' => $totalUser, 'totalBarang' => $totalBarang, 'totalSupplier' => $totalSupplier, 'totalPenjualan' => $totalPenjualan, 'totalDetailPenjualan' => $totalDetailPenjualan, 'totalStok' => $totalStok, 'totalStokDetail' => $totalStokDetail ]);
     }
 }
