@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\KategoriController;
+use App\Http\Controllers\Api\PenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,16 @@ use App\Http\Controllers\Api\KategoriController;
 // });
 
 Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->name('register');
+Route::post('/register1', App\Http\Controllers\Api\RegisterController::class)->name('register1');
 Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
+Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
+
 
 Route::get('levels', [LevelController::class, 'index']);
 Route::post('levels', [LevelController::class, 'store']);
@@ -60,4 +65,5 @@ Route::get('kategoris/{kategori}', [KategoriController::class, 'show']);
 Route::put('kategoris/{kategori}', [KategoriController::class, 'update']);
 Route::delete('kategoris/{kategori}', [KategoriController::class, 'destroy']);
 
-Route::post('/register1', App\Http\Controllers\Api\RegisterController::class)->name('register1');
+Route::get('penjualans/{penjualan}', [PenjualanController::class, 'show']);
+
